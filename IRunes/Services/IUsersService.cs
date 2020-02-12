@@ -13,5 +13,7 @@ namespace IRunes.Services
         bool UserExist(string username);
 
         bool EmailExist(string email);
+
+        string GetUsername(string id);
     }
 }

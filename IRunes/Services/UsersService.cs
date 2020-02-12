@@ -1,7 +1,5 @@
 ﻿using IRunes.Models;
 using SIS.MvcFramework;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -53,7 +51,7 @@ namespace IRunes.Services
         {
             return this.db.Users.Any(x => x.Email == email);
         }
-         
+
         public bool UserExist(string username)
         {
             return this.db.Users.Any(x => x.Username == username);
@@ -75,6 +73,16 @@ namespace IRunes.Services
             }
 
             return hash.ToString();
+        }
+
+        public string GetUsername(string id)
+        {
+            var username = this.db.Users
+                               .Where(x => x.Id == id)
+                                  .Select(x => x.Username)
+                                     .FirstOrDefault();
+
+            return username;
         }
     }
 }
