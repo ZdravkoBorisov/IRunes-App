@@ -51,6 +51,11 @@ namespace Panda.Services
             return username;
         }
 
+        public IEnumerable<string> GetUsernames()
+        {
+           return this.db.Users.Select(x => x.Username).ToList();
+        }
+
         public bool IsEmailUsed(string email)
         {
             return this.db.Users.Any(x => x.Email == email);

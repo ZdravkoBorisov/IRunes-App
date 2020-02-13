@@ -16,6 +16,7 @@ namespace Panda
         public void ConfigureServices(IServiceCollection serviceCollection)
         {
             serviceCollection.Add<IUsersService, UsersService>();
+            serviceCollection.Add<IPackagesService, PackagesService>();
         }
     }
 }

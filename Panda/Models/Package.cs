@@ -11,6 +11,7 @@ namespace Panda.Models
         public Package()
         {
             this.Id = Guid.NewGuid().ToString();
+            this.Status = Status.Pending; 
         }
 
         public string Id { get; set; }
