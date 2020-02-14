@@ -10,10 +10,12 @@ namespace Panda.Services
     public class PackagesService : IPackagesService
     {
         private readonly ApplicationDbContext db;
+        private readonly IReceiptsService receiptsService;
 
-        public PackagesService(ApplicationDbContext db)
+        public PackagesService(ApplicationDbContext db, IReceiptsService receiptsService)
         {
             this.db = db;
+            this.receiptsService = receiptsService;
         }
         public void CreatePackage(string description, decimal weight, string shippingAddress, string recipientName)
         {
@@ -35,12 +37,28 @@ namespace Panda.Services
             this.db.SaveChanges();
         }
 
-        public IQueryable<Package> GetAllByStatus(Status status )
+        public void Deliver(string id)
+        {
+            var package = this
+                .db.Packages
+                .Where(x => x.Id == id)
+                .FirstOrDefault();
+
+            package.Status = Status.Delivered;
+
+            this.db.SaveChanges(); 
+            this.receiptsService.CreateFromPackage(package.Weight, package.Id, package.RecipientId);
+
+        }
+
+        public IQueryable<Package> GetAllByStatus(Status status)
         {
             var packages = this.db.Packages
-                    .Where(x => x.Status == status); 
+                    .Where(x => x.Status == status);
 
             return packages;
         }
+
+
     }
 }

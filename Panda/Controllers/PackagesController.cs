@@ -22,6 +22,11 @@ namespace Panda.Controllers
         }
         public HttpResponse Details()
         {
+            if (this.IsUserLoggedIn())
+            {
+                return this.View();
+            }
+
             return this.View();
         }
 
@@ -72,6 +77,12 @@ namespace Panda.Controllers
                                      .ToList(); 
 
             return this.View(new PackagesListViewModel { Packages = packages});
+        }
+
+        public HttpResponse Deliver(string id)
+        {
+            this.packagesService.Deliver(id);
+            return this.Redirect("/Packages/Delivered");
         }
     }
 }

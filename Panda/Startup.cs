@@ -17,6 +17,7 @@ namespace Panda
         {
             serviceCollection.Add<IUsersService, UsersService>();
             serviceCollection.Add<IPackagesService, PackagesService>();
+            serviceCollection.Add<IReceiptsService, ReceiptsService>();
         }
     }
 }
