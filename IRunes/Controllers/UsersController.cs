@@ -1,13 +1,12 @@
-﻿using IRunes.Services;
-using IRunes.ViewModels.Users;
-using SIS.HTTP;
-using SIS.MvcFramework;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace IRunes.Controllers
 {
+    using SIS.HTTP;
+    using SIS.MvcFramework;
+
+    using Services;
+    using ViewModels.Users;
+
     public class UsersController : Controller
     {
         private readonly IUsersService usersService;
@@ -26,7 +25,7 @@ namespace IRunes.Controllers
         public HttpResponse Login(LoginInputModel input)
         {
             var userId = this.usersService.GetUserId(input.Username, input.Password);
-           
+
             if (userId != null)
             {
                 this.SignIn(userId);
@@ -82,6 +81,7 @@ namespace IRunes.Controllers
         public HttpResponse Logout()
         {
             this.SignOut();
+
             return this.Redirect("/");
         }
     }

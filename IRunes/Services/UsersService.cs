@@ -1,11 +1,12 @@
-﻿using IRunes.Models;
-using SIS.MvcFramework;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-
-namespace IRunes.Services
+﻿namespace IRunes.Services
 {
+    using System.Linq;
+    using System.Security.Cryptography;
+    using System.Text;
+
+    using SIS.MvcFramework;
+    using Models;
+  
     public class UsersService : IUsersService
     {
         private readonly ApplicationDbContext db;
@@ -20,9 +21,8 @@ namespace IRunes.Services
         {
             var hashPassword = this.Hash(password);
 
-            var user = this.db.Users.FirstOrDefault(x =>
-                                                     x.Username == username
-                                                     && x.Password == hashPassword);
+            var user = this.db.Users.FirstOrDefault(x => x.Username == username &&
+                                                         x.Password == hashPassword);
 
             if (user == null)
             {
@@ -66,7 +66,9 @@ namespace IRunes.Services
 
             var crypt = new SHA256Managed();
             var hash = new StringBuilder();
+
             byte[] crypto = crypt.ComputeHash(Encoding.UTF8.GetBytes(input));
+
             foreach (byte theByte in crypto)
             {
                 hash.Append(theByte.ToString("x2"));

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace IRunes.ViewModels.Tracks
+﻿namespace IRunes.ViewModels.Tracks
 {
     public class DetailsViewModel
     {
@@ -12,8 +8,6 @@ namespace IRunes.ViewModels.Tracks
 
         public string Link { get; set; }
 
-        public string AlbumId { get; set; }
-
-
+        public string AlbumId { get; set; } 
     }
 }

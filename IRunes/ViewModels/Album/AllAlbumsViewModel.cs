@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace IRunes.ViewModels.Album
+﻿namespace IRunes.ViewModels.Album
 {
+    using System.Collections.Generic;
+
     public class AllAlbumsViewModel
     {
         public IEnumerable<AlbumInfoViewModel> Albums { get; set; }

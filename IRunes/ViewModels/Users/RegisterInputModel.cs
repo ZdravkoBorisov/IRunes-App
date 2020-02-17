@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace IRunes.ViewModels.Users
+﻿namespace IRunes.ViewModels.Users
 {
-   public class RegisterInputModel
+    public class RegisterInputModel
     {
         public string Username { get; set; }
 

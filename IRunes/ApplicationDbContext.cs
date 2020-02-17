@@ -1,9 +1,10 @@
-﻿using IRunes.Models;
-using Microsoft.EntityFrameworkCore;
-
-namespace IRunes
+﻿namespace IRunes
 {
-    public  class ApplicationDbContext : DbContext
+    using Microsoft.EntityFrameworkCore;
+
+    using IRunes.Models;
+
+    public class ApplicationDbContext : DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

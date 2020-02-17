@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace IRunes.ViewModels.Album
+﻿namespace IRunes.ViewModels.Album
 {
     public class CreateInputModel
     {

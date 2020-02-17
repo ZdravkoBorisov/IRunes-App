@@ -1,10 +1,12 @@
-﻿using IRunes.Services;
-using SIS.HTTP;
-using SIS.MvcFramework;
-using System.Collections.Generic;
-
-namespace IRunes
+﻿namespace IRunes
 {
+    using System.Collections.Generic;
+
+    using SIS.HTTP;
+    using SIS.MvcFramework;
+
+    using Services;
+
     public class Startup : IMvcApplication
     {
         public void Configure(IList<Route> routeTable)

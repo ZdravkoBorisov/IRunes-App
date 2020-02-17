@@ -1,8 +1,9 @@
-﻿using SIS.MvcFramework;
-using System.Threading.Tasks;
-
-namespace IRunes
+﻿namespace IRunes
 {
+    using System.Threading.Tasks;
+
+    using SIS.MvcFramework;
+
     public class Program
     {
         public static async Task Main(string[] args)

@@ -1,10 +1,11 @@
-﻿using IRunes.Services;
-using IRunes.ViewModels.Album;
-using SIS.HTTP;
-using SIS.MvcFramework;
-
-namespace IRunes.Controllers
+﻿namespace IRunes.Controllers
 {
+    using SIS.HTTP;
+    using SIS.MvcFramework;
+
+    using Services;
+    using ViewModels.Album;
+
     public class AlbumsController : Controller
     {
         private readonly IAlbumsService albumsService;
@@ -29,6 +30,7 @@ namespace IRunes.Controllers
                     Name = x.Name,
                 }),
             };
+
             return this.View(viewModel);
         }
 
@@ -61,6 +63,7 @@ namespace IRunes.Controllers
             }
 
             this.albumsService.Create(input.Name, input.Cover);
+
             return this.Redirect("/Albums/All");
         }
 
@@ -72,6 +75,7 @@ namespace IRunes.Controllers
             }
 
             var viewModel = this.albumsService.GetDetails(id);
+
             return this.View(viewModel);
         }
     }

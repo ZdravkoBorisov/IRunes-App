@@ -1,12 +1,10 @@
-﻿using IRunes.Models;
-using IRunes.ViewModels.Tracks;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace IRunes.Services
+﻿namespace IRunes.Services
 {
+    using System.Linq;
+
+    using Models;
+    using ViewModels.Tracks;
+
     public class TracksService : ITracksService
     {
         private readonly ApplicationDbContext db;
@@ -33,22 +31,22 @@ namespace IRunes.Services
                     .Sum(x => x.Price);
 
             var album = this.db.Albums.Find(albumId);
-
-            album.Price = allTracksPricesSummed * 0.87m;
+                album.Price = allTracksPricesSummed * 0.87m;
 
             this.db.SaveChanges();
         }
 
         public DetailsViewModel GetDetails(string trackId)
         {
-            var track = this.db.Tracks.Where(x => x.Id == trackId).Select(x => new DetailsViewModel
-            {
-                Name = x.Name,
-                Link = x.Link,
-                AlbumId = x.AlbumId,
-                Price = x.Price
-            })
-                .FirstOrDefault();
+            var track = this.db.Tracks.Where(x => x.Id == trackId)
+                            .Select(x => new DetailsViewModel
+                            {
+                                Name = x.Name,
+                                Link = x.Link,
+                                AlbumId = x.AlbumId,
+                                Price = x.Price
+                            })
+                            .FirstOrDefault();
 
             return track;
         }

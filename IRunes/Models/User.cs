@@ -1,8 +1,9 @@
-﻿using SIS.MvcFramework;
-using System;
-
-namespace IRunes.Models
+﻿namespace IRunes.Models
 {
+    using System;
+
+    using SIS.MvcFramework;
+
     public class User : IdentityUser<string>
     { 
         public User()

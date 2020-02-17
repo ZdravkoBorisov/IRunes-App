@@ -1,11 +1,12 @@
-﻿using IRunes.Models;
-using IRunes.ViewModels.Album;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace IRunes.Services
+﻿namespace IRunes.Services
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using Models;
+    using ViewModels.Album;
+  
     public class AlbumsService : IAlbumsService
     {
         private readonly ApplicationDbContext db;
@@ -23,6 +24,7 @@ namespace IRunes.Services
                 Cover = cover,
                 Price = 0.0M,
             };
+
             this.db.Albums.Add(album);
             this.db.SaveChanges();
         }
@@ -30,12 +32,13 @@ namespace IRunes.Services
         public IEnumerable<T> GetAll<T>(Func<Album, T> selectFunc)
         {
             var allAlbums = this.db.Albums.Select(selectFunc).ToList();
+
             return allAlbums;
         }
 
-        public AlbumDetailsViewModel GetDetails(string id)
+        public AlbumDetailsViewModel GetDetails(string trackId)
         {
-            var album = this.db.Albums.Where(x => x.Id == id)
+            var album = this.db.Albums.Where(x => x.Id == trackId)
                 .Select(x => new AlbumDetailsViewModel
                 {
                     Id = x.Id,
@@ -48,6 +51,7 @@ namespace IRunes.Services
                         Name = t.Name,
                     })
                 }).FirstOrDefault();
+
             return album;
         }
     }

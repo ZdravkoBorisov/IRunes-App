@@ -1,11 +1,12 @@
-﻿using IRunes.Models;
-using IRunes.ViewModels.Album;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace IRunes.Services
+﻿namespace IRunes.Services
 {
+    using System;
+    using System.Collections.Generic;
+
+    using Models;
+    using ViewModels.Album;
+
+
     public interface IAlbumsService
     {
         void Create(string name, string cover);

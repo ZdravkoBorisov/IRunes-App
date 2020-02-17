@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace IRunes.ViewModels.Tracks
+﻿namespace IRunes.ViewModels.Tracks
 {
-   public class CreateInputModel
+    public class CreateInputModel
     {
         public string AlbumId { get; set; }
 

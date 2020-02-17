@@ -1,13 +1,12 @@
-﻿using IRunes.Services;
-using IRunes.ViewModels.Tracks;
-using SIS.HTTP;
-using SIS.MvcFramework;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace IRunes.Controllers
+﻿namespace IRunes.Controllers
 {
+    using SIS.HTTP;
+    using SIS.MvcFramework;
+
+    using Services;
+    using ViewModels.Tracks;
+
+
     public class TracksController : Controller
     {
         private readonly ITracksService tracksService;
@@ -17,17 +16,14 @@ namespace IRunes.Controllers
             this.tracksService = tracksService;
         }
 
-        public HttpResponse Create(string id)
+        public HttpResponse Create(string albumId)
         {
             if (!this.IsUserLoggedIn())
             {
                 return this.Redirect("/Users/Login");
             }
 
-            var viewModel = new CreateViewModel
-            {
-                AlbumId = id
-            };
+            var viewModel = new CreateViewModel { AlbumId = albumId };
 
             return this.View(viewModel);
         }
@@ -42,17 +38,17 @@ namespace IRunes.Controllers
 
             if (input.Name.Length < 4 || input.Name.Length > 20)
             {
-                return this.Error("Track should be between 4 and 20 character!");
+                return this.Error("Track name should be between 4 and 20 characters.");
             }
 
-            if (string.IsNullOrWhiteSpace(input.Link))
+            if (!input.Link.StartsWith("http"))
             {
-                return this.Error("Link cannot be empty");
+                return this.Error("Invalid link.");
             }
 
             if (input.Price < 0)
             {
-                return this.Error("Price should be positive number!");
+                return this.Error("Price should be a positive number.");
             }
 
             this.tracksService.Create(input.AlbumId, input.Name, input.Link, input.Price);
@@ -68,6 +64,11 @@ namespace IRunes.Controllers
             }
 
             var viewModel = this.tracksService.GetDetails(trackId);
+         
+            if (viewModel == null)
+            {
+                return this.Error("Track not found.");
+            }
 
             return this.View(viewModel);
         }
